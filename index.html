@@ -91,6 +91,22 @@
   .cycle .node .n{font-family:var(--serif);font-size:13px;font-weight:600;fill:var(--accent-dark)}
   .cycle .center{font-family:var(--serif);font-style:italic;font-size:20px;fill:var(--muted)}
 
+  /* foto no topo */
+  .portrait{position:relative;width:100%;max-width:420px;justify-self:end}
+  .portrait img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:35% 28%;border-radius:24px;filter:saturate(.92)}
+  .portrait::after{content:"";position:absolute;right:-16px;top:-16px;width:110px;height:110px;border-radius:50%;background:var(--accent);z-index:-1}
+  .portrait .badge{position:absolute;left:-28px;bottom:28px;width:132px;height:132px;border-radius:50%;background:var(--paper);box-shadow:0 18px 40px -22px rgba(18,26,38,.5)}
+  .portrait .badge svg{width:100%;height:100%}
+  .portrait .badge .ring{fill:none;stroke:var(--ink);stroke-width:2;opacity:.18}
+  .portrait .badge .run{fill:none;stroke:var(--accent);stroke-width:4;stroke-linecap:round;stroke-dasharray:60 540;animation:run2 6s linear infinite}
+  @keyframes run2{to{stroke-dashoffset:-600}}
+  .portrait .badge text{font-family:var(--serif);font-style:italic;font-size:22px;fill:var(--ink)}
+  .portrait figcaption{font-size:14px;color:var(--muted);margin-top:14px;text-align:right}
+  .byline{display:none;align-items:center;gap:12px;margin-bottom:22px;font-size:15px;color:var(--ink-2)}
+  .byline img{width:48px;height:48px;border-radius:50%;object-fit:cover;object-position:35% 22%}
+  .byline b{font-weight:600;color:var(--ink)}
+  .proof .btn-link{margin-top:32px}
+
   /* história */
   .story{padding:110px 0 100px;border-top:1px solid var(--line)}
   .story .wrap{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start}
@@ -187,6 +203,8 @@
   @media (max-width:980px){
     .hero .wrap{grid-template-columns:1fr;gap:56px}
     .cycle{justify-self:center;max-width:380px}
+    .portrait{display:none}
+    .byline{display:flex}
     .story .wrap{grid-template-columns:1fr;gap:40px}
     .proof .wrap{grid-template-columns:1fr;gap:28px}
     .steps{grid-template-columns:1fr 1fr;row-gap:36px}
@@ -203,6 +221,7 @@
     .hero{padding:24px 0 72px}
     .story,.gets{padding:80px 0}
     .proof{padding:80px 0 0}
+    .gets .head .btn-link{display:none}
     .faq{padding:0 0 80px}
     .faq summary{font-size:17px;padding:20px 0}
     .iterar,.close{padding:88px 0 56px}
@@ -216,7 +235,7 @@
     .form{padding:16px}
   }
   @media (prefers-reduced-motion:reduce){
-    .cycle .run{animation:none;stroke-dasharray:none;opacity:.0}
+    .cycle .run,.portrait .badge .run{animation:none;stroke-dasharray:none;opacity:.0}
     .rise{opacity:1;transform:none;transition:none}
     html{scroll-behavior:auto}
   }
@@ -237,6 +256,7 @@
 <section class="hero">
   <div class="wrap">
     <div class="rise">
+      <div class="byline"><img src="ramon.jpg" alt="Ramon Freitas"><span>Por <b>Ramon Freitas</b>, idealizador do TP6</span></div>
       <span class="eyebrow">Para quem começa, para e recomeça do zero</span>
       <h1>Pare de recomeçar do zero. <em>Comece a sustentar o que você começa.</em></h1>
       <p class="tagline">Na <strong>Iterar</strong>, eu te mando duas vezes por semana um passo pra sair do lugar. Grátis, no seu e-mail.</p>
@@ -257,27 +277,17 @@
       </form>
     </div>
 
-    <div class="cycle rise" aria-hidden="true">
-      <svg viewBox="-72 0 556 400">
-        <circle class="ring" cx="200" cy="200" r="150"/>
-        <circle class="run" cx="200" cy="200" r="150" transform="rotate(-90 200 200)"/>
-        <!-- 5 pontos no círculo, começando no topo -->
-        <g class="node"><circle cx="200" cy="50" r="7"/></g>
-        <g class="node"><circle cx="342.7" cy="153.6" r="7"/></g>
-        <g class="node"><circle cx="288.2" cy="321.4" r="7"/></g>
-        <g class="node"><circle cx="111.8" cy="321.4" r="7"/></g>
-        <g class="node"><circle cx="57.3" cy="153.6" r="7"/></g>
-        <g class="node">
-          <text x="200" y="20" text-anchor="middle">Clareza</text>
-          <text x="362" y="150" text-anchor="start">Organização</text>
-          <text x="302" y="352" text-anchor="start">Execução</text>
-          <text x="98" y="352" text-anchor="end">Revisão</text>
-          <text x="38" y="150" text-anchor="end">Reajuste</text>
-        </g>
-        <text class="center" x="200" y="196" text-anchor="middle">e o ciclo</text>
-        <text class="center" x="200" y="222" text-anchor="middle">recomeça</text>
-      </svg>
-    </div>
+    <figure class="portrait rise">
+      <img src="ramon.jpg" alt="Ramon Freitas" width="600" height="800">
+      <div class="badge" aria-hidden="true">
+        <svg viewBox="0 0 120 120">
+          <circle class="ring" cx="60" cy="60" r="44"/>
+          <circle class="run" cx="60" cy="60" r="44" transform="rotate(-90 60 60)"/>
+          <text x="60" y="67" text-anchor="middle">iterar</text>
+        </svg>
+      </div>
+      <figcaption>Ramon Freitas, idealizador do TP6</figcaption>
+    </figure>
   </div>
 </section>
 
@@ -329,6 +339,9 @@
       <p>O que mais se repetia: a pessoa ficava irreconhecível durante o desafio. Quando o desafio acabava, voltava ao ponto de partida.</p>
       <p>Toda mudança tinha data pra acabar. E o hábito acabava junto.</p>
       <p class="turn">Por isso eu escrevo sobre hábito sem prazo de validade.</p>
+      <a class="btn-link" href="#assinar">Quero receber
+        <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 4v12m-5-5 5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
     </div>
   </div>
 </section>
