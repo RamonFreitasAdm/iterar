@@ -240,6 +240,17 @@
     html{scroll-behavior:auto}
   }
 </style>
+<!-- Pixel da Meta: mede visitas e inscrições vindas dos anúncios. -->
+<script>
+  var META_PIXEL_ID = "2298104770939205";
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+  document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', META_PIXEL_ID);
+  fbq('track', 'PageView');
+</script>
 </head>
 <body>
 
@@ -431,6 +442,7 @@
     <footer>
       <span>© 2026 Ramon Freitas</span>
       <span>Iterar · melhorar um pouco, toda semana</span>
+      <span>Esta página usa o pixel da Meta para medir os anúncios.</span>
     </footer>
   </div>
 </section>
@@ -475,7 +487,10 @@
       fetch(KIT_URL, { method: "POST", body: new FormData(form), headers: { "Accept": "application/json" } })
         .then(function(r){ return r.json().catch(function(){ return {}; }).then(function(j){ return { ok: r.ok, j: j }; }); })
         .then(function(res){
-          if (res.ok && (!res.j.status || res.j.status === "success")) { form.classList.add("sent"); }
+          if (res.ok && (!res.j.status || res.j.status === "success")) {
+            form.classList.add("sent");
+            if (window.fbq) fbq("track", "Lead"); // conta a inscrição para os anúncios
+          }
           else { form.classList.add("error"); }
         })
         .catch(function(){ form.classList.add("error"); })
